@@ -1,6 +1,7 @@
 package levelPieces;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import gameEngine.Drawable;
 import gameEngine.Moveable;
@@ -14,13 +15,20 @@ public class LevelSetup {
 	
 	public void createLevel(int levelNum) {
 		// Create level for level 1
-		board = new Drawable[10];
-		board[2] = new Bush();
-		movingPieces = new ArrayList<Moveable>();
-		interactingPieces = new ArrayList<GamePiece>();
-		startPlayer = 0;
+		if(levelNum == 1) {
+			board = new Drawable[10];
+			board[2] = new Bush();
+			board[4] = new Trophy(4);
+			board[6] = new Bush();
+			board[8] = new Archer(8);
+			movingPieces = new ArrayList<Moveable>(Arrays.asList((Moveable)board[8]));
+			interactingPieces = new ArrayList<GamePiece>(Arrays.asList((GamePiece)board[8],(GamePiece)board[4]));
+			startPlayer = 0;
+		}
 		//Create level for level 2
-		
+		else {
+			
+		}
 	}
 
 	public Drawable[] getBoard() {
