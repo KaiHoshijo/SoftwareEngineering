@@ -6,11 +6,9 @@ import gameEngine.Moveable;
 
 public class Archer extends GamePiece implements Drawable, Moveable {
 
-	private int range;
 	
-	public Archer(int location, int size) {
+	public Archer(int location) {
 		super('A', "Archer", location);
-		range = size;
 	}
 	
 	@Override
@@ -18,14 +16,46 @@ public class Archer extends GamePiece implements Drawable, Moveable {
 		// Find current location in game board
 		// decide to move left or right to get to player
 		// move to next available square in direction of player
-		
-
+		if (super.getLocation() < playerLocation) {
+			//move to next available square, or stay if none available
+			for(int i = super.getLocation(); i < gameBoard.length; i ++) {
+				if(gameBoard[i]==null) {
+					super.setLocation(i);
+				}
+			}
+		}
+		else {
+			for(int i = super.getLocation(); i > 0; i --) {
+				if(gameBoard[i]==null) {
+					super.setLocation(i);
+				}
+			}
+		}
 	}
 
 	@Override
 	public InteractionResult interact(Drawable[] gameBoard, int playerLocation) {
 		// if no pieces between player and archer, player loses a heart
-		return null;
+		//check right
+		for(int i = super.getLocation(); i < gameBoard.length; i ++) {
+			if(i == playerLocation) {
+				return(InteractionResult.HIT);
+			}
+			else if(gameBoard[i]!=null) {
+				break;
+			}
+		}
+		//check left
+		//
+		for(int i = super.getLocation(); i > 0; i --) {
+			if(i == playerLocation) {
+				return(InteractionResult.HIT);
+			}
+			else if(gameBoard[i]!=null) {
+				break;
+			}
+		}
+		return(InteractionResult.NONE);
 	}
 	
 }
