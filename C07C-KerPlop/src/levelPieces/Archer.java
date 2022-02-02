@@ -16,11 +16,15 @@ public class Archer extends GamePiece implements Drawable, Moveable {
 		// Find current location in game board
 		// decide to move left or right to get to player
 		// move to next available square in direction of player
+		int old = super.getLocation(); //will be set to null if archer moves
 		if (super.getLocation() < playerLocation) {
 			//move to next available square, or stay if none available
 			for(int i = super.getLocation(); i < gameBoard.length; i ++) {
 				if(gameBoard[i]==null) {
-					super.setLocation(i);
+					super.setLocation(i); //update archer location
+					gameBoard[i] = this;
+					gameBoard[old] = null;
+					break;
 				}
 			}
 		}
@@ -28,6 +32,9 @@ public class Archer extends GamePiece implements Drawable, Moveable {
 			for(int i = super.getLocation(); i > 0; i --) {
 				if(gameBoard[i]==null) {
 					super.setLocation(i);
+					gameBoard[i] = this;
+					gameBoard[old] = null;
+					break;
 				}
 			}
 		}
