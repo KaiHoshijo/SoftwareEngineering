@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import gameEngine.Drawable;
 import gameEngine.Moveable;
+import gameEngine.GameEngine;
 
 public class LevelSetup {
 
@@ -16,7 +17,7 @@ public class LevelSetup {
 	public void createLevel(int levelNum) {
 		// Create level for level 1
 		if(levelNum == 1) {
-			board = new Drawable[10];
+			board = new Drawable[GameEngine.BOARD_SIZE];
 			board[2] = new Bush();
 			board[4] = new Trophy(4);
 			board[6] = new Bush();
