@@ -96,6 +96,13 @@ public class Player implements Drawable {
 	public void takeDamage() {
 		damagePoints++;
 	}
+	
+	/**
+	 * Decrements damage player has taken
+	 */
+	public void healDamage() {
+		damagePoints = damagePoints == 0 ? damagePoints : damagePoints - 1;
+	}
 
 	/**
 	 * Sets player status to killed

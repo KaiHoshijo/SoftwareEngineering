@@ -206,6 +206,11 @@ public class GameEngine {
 				// can only advance once
 				break;
 			}
+			
+			if (result == InteractionResult.HEAL) {
+				player.healDamage();
+				System.out.println("\nYou found a potion! Damage healed!\n");
+			}
 		}
 	}
 
