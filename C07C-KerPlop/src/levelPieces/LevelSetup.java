@@ -33,9 +33,9 @@ public class LevelSetup {
 			board[4] = new Trophy(4);
 			board[6] = new Bush();
 			board[8] = new HealthPotion(8);
-			board[3] = new Lich(3,board);
-			movingPieces = new ArrayList<Moveable>(Arrays.asList((Moveable)board[8],(Moveable)board[3]));
-			interactingPieces = new ArrayList<GamePiece>(Arrays.asList((GamePiece)board[8],(GamePiece)board[4],(GamePiece)board[3],(GamePiece)board[2]));
+			board[10] = new Lich(10,board);
+			movingPieces = new ArrayList<Moveable>(Arrays.asList((Moveable)board[10]));
+			interactingPieces = new ArrayList<GamePiece>(Arrays.asList((GamePiece)board[8],(GamePiece)board[4],(GamePiece)board[10],(GamePiece)board[2]));
 			startPlayer = 0;
 		}
 	}

@@ -8,14 +8,10 @@ import gameEngine.Moveable;
 import java.util.Random;
 
 public class Lich extends GamePiece implements Moveable {
-	Random randomLocation = new Random();
+	private Random randomLocation = new Random();
 	
 	public Lich(int location, Drawable[] gameBoard) {
-		super('L', "Lich", 0);
-		int newLocation = getRandomLocation(gameBoard, super.getLocation());
-		super.setLocation(newLocation);
-		gameBoard[newLocation] = this;
-		
+		super('L', "Lich", location);		
 	}
 	
 	
@@ -57,7 +53,7 @@ public class Lich extends GamePiece implements Moveable {
 		int fireballSpace = randomLocation.nextInt(1, 6);
 		// If the difference between the player and lich is less than the fireball then the player shall be
 		// consumed by the hellfire that is summoned by cursed lich!
-		return difference - fireballSpace <= 0 ? InteractionResult.HIT : InteractionResult.NONE;
+		return difference - fireballSpace <= 0 ? InteractionResult.KILL : InteractionResult.NONE;
 	}
 	
 }
