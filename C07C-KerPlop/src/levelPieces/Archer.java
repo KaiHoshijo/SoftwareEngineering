@@ -44,7 +44,7 @@ public class Archer extends GamePiece implements Drawable, Moveable {
 	public InteractionResult interact(Drawable[] gameBoard, int playerLocation) {
 		// if no pieces between player and archer, player loses a heart
 		//check right
-		for(int i = super.getLocation(); i < gameBoard.length; i ++) {
+		for(int i = super.getLocation()+1; i < gameBoard.length; i ++) {
 			if(i == playerLocation) {
 				return(InteractionResult.HIT);
 			}
@@ -54,7 +54,7 @@ public class Archer extends GamePiece implements Drawable, Moveable {
 		}
 		//check left
 		//
-		for(int i = super.getLocation(); i > 0; i --) {
+		for(int i = super.getLocation()-1; i > 0; i --) {
 			if(i == playerLocation) {
 				return(InteractionResult.HIT);
 			}
