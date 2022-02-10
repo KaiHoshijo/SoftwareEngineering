@@ -56,4 +56,51 @@ public class TestInteractions {
 		for (int i=11; i<GameEngine.BOARD_SIZE; i++)	
 			assertEquals(InteractionResult.NONE, trophy.interact(gameBoard, i));
 	}
+	@Test
+	// The lich should kill the player if within a correct distance
+	public void testLich() {
+		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
+		Lich lich = new Lich(5, gameBoard);
+		gameBoard[5] = lich;
+		// Player should be kill if it is close enough to the lich
+		assertEquals(InteractionResult.KILL, lich.interact(gameBoard, 4));
+		// This should work on either sides of the lich
+		assertEquals(InteractionResult.KILL, lich.interact(gameBoard, 6));
+		
+		// Should be able to work up to five spaces away
+		int fiveSpace = 0;
+		for (int i = 0; i < 50; i++) {
+			if (InteractionResult.KILL.equals(lich.interact(gameBoard, 0))) {
+				fiveSpace++;
+				break;
+			}
+		}
+		
+		assert(fiveSpace == 1);
+		
+		// Should be no issues if the lich is far enough
+		for (int i = 11; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, lich.interact(gameBoard, i));
+		}
+		
+	}
+	
+	@Test
+	// The player should be healed when it's on the health potion
+	public void testHealthPotion() {
+		Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
+		HealthPotion potion = new HealthPotion(3);
+		gameBoard[3] = potion;
+		
+		// Player should be healed when on the same space
+		assertEquals(InteractionResult.HEAL, potion.interact(gameBoard, 3));
+		
+		// Player should have no interaction if no where else
+		for (int i = 0; i < 3; i++) {
+			assertEquals(InteractionResult.NONE, potion.interact(gameBoard, i));
+		}
+		for (int i = 4; i < GameEngine.BOARD_SIZE; i++) {
+			assertEquals(InteractionResult.NONE, potion.interact(gameBoard, i));
+		}
+	}
 }
